@@ -1,7 +1,6 @@
-import { Entity, Column, CreateDateColumn, PrimaryColumn, OneToMany, JoinColumn, ManyToMany, JoinTable } from "typeorm";
+import { Entity, Column, CreateDateColumn, PrimaryColumn, OneToMany } from "typeorm";
 import { v4 as uuid } from 'uuid';
 import { Chave } from "./Chave";
-import { Transaction } from "./Transaction";
 
 @Entity('users')
 export class User {
@@ -13,6 +12,9 @@ export class User {
 
     @Column()
     telefone: string;
+
+    @OneToMany(() => Chave, chave => chave.user)
+    chaves: Chave[];
 
     @CreateDateColumn()
     created_at: Date;

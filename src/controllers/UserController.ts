@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { User } from "../entities/User";
+import { User } from "../models/User";
 
 export class UserController {
     async show (req: Request, res: Response) {
@@ -10,7 +10,9 @@ export class UserController {
 
             return res.json(users);
         } catch (err) {
-            return res.status(400).json(err)
+            return res.status(400).json({
+                error: err
+            });
         }
     }
 
@@ -30,7 +32,36 @@ export class UserController {
 
             return res.status(200).json(user);
         } catch (err) {
-            return res.status(400).json(err)
+            return res.status(400).json({
+                error: err
+            });
         }        
+    }
+
+    async showChaves (req: Request, res: Response){
+        try {
+            const { id } = req.body;
+
+            const repoUser = getRepository(User);
+
+            if(!(await repoUser.findOne(id))) {
+                return res.status(400).json({
+                    error: 'Users does not exists'
+                });
+            }
+
+            const userChaves = await repoUser.findOne({
+                relations: ['chaves'],
+                where: { id }
+            });
+
+            const chaves = userChaves?.chaves;
+            
+            return res.status(200).json(chaves);
+        } catch (err) {
+            return res.status(400).json({
+                error: err
+            });
+        }
     }
 }
