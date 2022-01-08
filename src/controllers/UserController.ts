@@ -21,6 +21,12 @@ export class UserController {
             const { nome, telefone } = req.body;
             const repoUser = getRepository(User);
 
+            if (telefone.length < 8) {
+                return res.status(400).json({
+                    error: 'Telefone field must have at least 8 characters '
+                })
+            }
+
             if (await repoUser.findOne({ nome })) {
                 return res.status(400).json({
                     error: 'Users already exists'
