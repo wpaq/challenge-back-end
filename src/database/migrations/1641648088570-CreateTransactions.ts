@@ -1,11 +1,11 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateChaves1641591941847 implements MigrationInterface {
+export class CreateTransactions1641648088570 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'chaves',
+                name: 'transactions',
                 columns: [
                     {
                         name: 'id',
@@ -17,7 +17,11 @@ export class CreateChaves1641591941847 implements MigrationInterface {
                         type: 'real'
                     },
                     {
-                        name: 'user_id',
+                        name: 'user_send',
+                        type: 'uuid',
+                    },
+                    {
+                        name: 'user_receive',
                         type: 'uuid',
                     },
                     {
@@ -33,8 +37,14 @@ export class CreateChaves1641591941847 implements MigrationInterface {
                 ],
                 foreignKeys: [
                     {
-                        name: 'fk_chaves_user',
-                        columnNames: ['user_id'],
+                        name: 'fk_transactions_user_send',
+                        columnNames: ['user_send'],
+                        referencedTableName: 'users',
+                        referencedColumnNames: ['id']
+                    },
+                    {
+                        name: 'fk_transactions_user_receive',
+                        columnNames: ['user_receive'],
                         referencedTableName: 'users',
                         referencedColumnNames: ['id']
                     }
@@ -44,8 +54,7 @@ export class CreateChaves1641591941847 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('chaves');
+        await queryRunner.dropTable('transactions');
     }
 
 }
-

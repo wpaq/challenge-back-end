@@ -1,15 +1,19 @@
 import { Router } from 'express';
-import { CreateChaveController } from './controllers/CreateChaveController';
-import { GetAllChavesController } from './controllers/GetAllChavesController';
-import { CreateUserController } from './controllers/CreateUserController';
-import { GetAllUsersController } from './controllers/GetAllUsersController';
+import { ChaveController } from './controllers/ChaveController';
+import { UserController } from './controllers/UserController';
+import { CreateTransactionController } from './controllers/CreateTransactionController';
 
 const routes = Router();
 
-routes.get('/users', new GetAllUsersController().handle);
-routes.post('/users', new CreateUserController().handle);
+// Users
+routes.get('/users', new UserController().show);
+routes.post('/users', new UserController().store);
 
-routes.get('/chaves', new GetAllChavesController().handle);
-routes.post('/chaves', new CreateChaveController().handle);
+// Chaves
+routes.get('/chaves', new ChaveController().show);
+routes.post('/chaves', new ChaveController().store);
+
+// Transactions
+routes.post('/transactions', new CreateTransactionController().handle);
 
 export { routes };

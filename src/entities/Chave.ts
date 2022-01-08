@@ -8,7 +8,7 @@ export class Chave {
     id: string;
 
     @Column()
-    valor: string;
+    valor: number;
 
     @Column()
     user_id: string;

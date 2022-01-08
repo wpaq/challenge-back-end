@@ -1,6 +1,7 @@
-import { Entity, Column, CreateDateColumn, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
+import { Entity, Column, CreateDateColumn, PrimaryColumn, OneToMany, JoinColumn, ManyToMany, JoinTable } from "typeorm";
 import { v4 as uuid } from 'uuid';
 import { Chave } from "./Chave";
+import { Transaction } from "./Transaction";
 
 @Entity('users')
 export class User {
