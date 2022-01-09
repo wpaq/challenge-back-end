@@ -12,4 +12,4 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(routes);
 
-app.listen(port || 3000, () => console.log(`Running in port ${port || 3000}`));
+app.listen(port || 3333, () => console.log(`Running in port ${port || 3333}`));
