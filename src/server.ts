@@ -7,8 +7,9 @@ import express from 'express';
 import { routes } from './routes';
 
 const app = express();
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(routes);
 
-app.listen(process.env.PORT || 3000, () => console.log(`Running in port ${process.env.PORT}`));
+app.listen(port || 3000, () => console.log(`Running in port ${port || 3000}`));

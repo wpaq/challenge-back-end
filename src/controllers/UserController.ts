@@ -8,7 +8,7 @@ export class UserController {
             const repoUser = getRepository(User);
             const users = await repoUser.find();
 
-            return res.json(users);
+            return res.status(200).json(users);
         } catch (err) {
             return res.status(400).json({
                 error: err

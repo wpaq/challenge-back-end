@@ -8,7 +8,7 @@ export class Transaction {
     id: string;
 
     @Column()
-    valor: string;
+    valor: number;
 
     @Column()
     user_send: string;
